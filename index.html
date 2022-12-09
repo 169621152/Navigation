@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <!-- import CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+  <link rel="stylesheet" href="naver.css">
+  <title>一成便捷导航网</title>
+</head>
+
+
+<body>
+  <div id="app">
+    <template>
+      <el-container>
+        <!-- 头部 -->
+        <el-header style="height: 6vh; ">
+          <div class="TopLeft" style="float: left;margin-right: auto; ">
+            <i class="el-icon-s-help"></i>
+            <span> 一成导航网 </span>
+            <i class="el-icon-s-unfold" id="targ" style="margin-left: 50px;"></i>
+          </div>
+
+          <div @mouseover="OpenChat()" @mouseleave="OverChat()" class="TopRight" style="
+        position: relative;
+        width: 30px;
+        height: 6vh;display: flex;
+        align-items: center;
+        cursor: pointer;
+        ">
+            <i class="el-icon-s-grid" style="cursor: pointer;"></i>
+
+            <div class="chat" id="chat" style="
+          position: absolute; 
+          right: -1vw; 
+          top: 6vh;
+          width:105px;
+          line-height: 28px;
+          background: #fff;
+          border: 1px solid #2F4F4F;
+          border-top: none;
+          display: none;
+          /* box-shadow:0 1px 2px rgb(0 0 0 / 35%) ; */
+          /* padding: 10px; */
+          ">
+
+
+
+              <p class="chatP">
+                <i class="el-icon-s-opportunity" style="color:#000"></i>
+                <span>
+                  <a v-bind:href="Advice">
+                    建议或评价
+                  </a>
+                </span>
+              </p>
+
+              <p class="chatP">
+                <i class="el-icon-s-custom" style="color:#000"></i>
+                <span>
+                  <a v-bind:href="Content">
+                    联系站主
+                  </a>
+                </span>
+              </p>
+            </div>
+
+          </div>
+        </el-header>
+        <el-container>
+          <!-- 侧边栏 -->
+          <el-aside width="200px">
+            <div class="MainBox">
+              <ul>
+                <li class="ChooseNva" >
+                  <div class="Open" @click="SwitchNva()">
+                    <i class="el-icon-s-home"></i>
+                    <span>常用导航</span>
+                    <i class="el-icon-plus"></i>
+                  </div>
+
+
+                  <ul class="TwoNav">
+
+                    <li>
+                      <a target="_blank" v-bind:href="Advice">
+                        <i class="el-icon-position"> </i>
+                        <span> 百度网 </span>
+                      </a>
+                    </li>
+
+                    <li>
+                      <a target="_blank" href="https://cn.bing.com/">
+                        <i class="el-icon-position"> </i>
+                        <span> 必应网 </span>
+                      </a>
+                    </li>
+
+                    <li>
+                      <a target="_blank" href="https://fanyi.youdao.com/index.html#/">
+                        <i class="el-icon-position"> </i>
+                        <span> 有道翻译 </span>
+                      </a>
+                    </li>
+
+                    <li>
+                      <a target="_blank" href="https://www.gooood.cn/">
+                        <i class="el-icon-position"> </i>
+                        <span> 谷德网 </span>
+                      </a>
+                    </li>
+
+                    <li>
+                      <a target="_blank" href="https://www.om.cn/">
+                        <i class="el-icon-position"> </i>
+                        <span> 欧模网 </span>
+                      </a>
+                    </li>
+
+                    <li>
+                      <a target="_blank" href="https://www.bilibili.com/">
+                        <i class="el-icon-position"> </i>
+                        <span> Bilibili </span>
+                      </a>
+                    </li>
+
+                  </ul>
+
+                </li>
+
+                <li class="ChooseNva">
+                  <div class="Open">
+                    <a href="https://huaban.com/">
+                    <i class="el-icon-eleme"></i>
+                    <span>花瓣网</span>
+                    <i class="el-icon-caret-left"></i>
+                  </a>
+                  </div>
+                </li>
+
+                <li class="ChooseNva">
+                  <div class="Open">
+                    <a href="https://www.vcg.com/">
+                      <i class="el-icon-info"></i>
+                      <span>视觉中国</span>
+                      <i class="el-icon-caret-left"></i>
+                    </a>
+                  </div>
+                </li>
+
+                <li class="ChooseNva">
+                  <div class="Open">
+                    <a target="_blank" href="https://www.zcool.com.cn/">
+                    <i class="el-icon-camera-solid"></i>
+                    <span>站酷网</span>
+                    <i class="el-icon-caret-left"></i>
+                  </a>
+                  </div>
+                </li>
+
+                <li class="ChooseNva">
+                  <div class="Open">
+                    <a target="_blank" href="https://www.51yuansu.com/">
+                    <i class="el-icon-s-cooperation"></i>
+                    <span>觅元素</span>
+                    <i class="el-icon-caret-left"></i>
+                  </a>
+                  </div>
+                </li>
+
+                <li class="ChooseNva">
+                  <div class="Open">
+                    <a target="_blank" href="https://www.sucai999.com/">
+                    <i class="el-icon-s-open"></i>
+                    <span>菜鸟图库</span>
+                    <i class="el-icon-caret-left"></i>
+                  </a>
+                  </div>
+                </li>
+
+              </ul>
+            </div>
+
+          </el-aside>
+          <!-- 项目内容 -->
+          <el-main>
+
+            <div class="pdf">
+
+
+              <div class="search">
+                <div class="searchBox">
+
+                  <div class="btnGroup">
+                    <span class="chooseNva">常用 ></span>
+                    <span class="chooseBtn" id="baidu" style="color: #0093D3;">百度</span>
+                    <span class="chooseBtn" id="huaban" style="color: #e8b49a;">花瓣</span>
+                    <span class="chooseBtn" id="biying" style="color: #5a1f1b;">必应</span>
+                    <span class="chooseBtn" id="zhanku" style="color: #fcb70a;">站酷</span>
+                    <span class="chooseBtn" id="iconfont" style="color:#bec936 ;">Iconfont</span>
+                    <span class="chooseBtn" id="shijuezhongguo" style="color:#c04851 ;">视觉中国</span>
+
+
+                  </div>
+
+
+                  <form id="foom" action="https://www.baidu.com/s?wd=" onsubmit="return submit_from()" target="_blank">
+                    <input id="searchX" οnkeypress="if (event.keyCode == 13) showResult()" type="text" value=""
+                      @keyup.enter="Enter()" placeholder="百度搜索">
+                    <button id="searchY" type="button">
+                      <i class="el-icon-search"></i>
+                    </button>
+                  </form>
+                </div>
+              </div>
+              <div class="MainContent">
+
+                <!-- 常用导航栏 -->
+                <div class="cbox">
+
+                  <div class="naver">
+
+                    <div class="naverLine">
+                      <i class="el-icon-s-home"></i>
+                      <span>常用导航</span>
+                    </div>
+
+                  </div>
+                  <el-row :gutter="20">
+                    <el-col :span="4">
+                      <div class="grid-content bg-purple bkchange">
+                        <a target="_blank" href="https://huaban.com/">
+                          <h3>花瓣网</h3>
+                          <span>花瓣网__陪你做生活的设计师!</span>
+                        </a>
+                      </div>
+                    </el-col>
+                    <el-col :span="4">
+                      <div class="grid-content bg-purple bkchange">
+                        <a target="_blank" href="https://fanyi.youdao.com/">
+                          <h3>有道翻译</h3>
+                          <span>有道翻译提供即时免费的中文、英语、日语、韩语、法语、德语、俄语、西班牙语、葡萄牙语、越南语、印尼语、意大利语、荷兰语、泰语全文翻译、网页翻译、文档翻译服务。</span>
+                        </a>
+                      </div>
+                    </el-col>
+                    <el-col :span="4">
+                      <div class="grid-content bg-purple bkchange">
+                        <a target="_blank" href="https://shipin520.com/?from_code=464">
+                          <h3>潮点视频</h3>
+                          <span>一站搞定视频创作，正版素材放心下载</span>
+                        </a>
+                      </div>
+                    </el-col>
+                    <el-col :span="4">
+                      <div class="grid-content bg-purple bkchange">
+                        <a target="_blank" href="https://izihun.com/?from=daohang">
+                          <h3>字魂</h3>
+                          <span>字体下载_免费字体下载_商用字体设计定制--字魂网</span>
+                        </a>
+                      </div>
+                    </el-col>
+                    <el-col :span="4">
+                      <div class="grid-content bg-purple bkchange">
+                        <a target="_blank" href="https://www.51yuansu.com/">
+                          <h3>觅元素</h3>
+                          <span>觅元素_免费PNG素材_高清背景图片免费下载网站</span>
+                        </a>
+                      </div>
+                    </el-col>
+                    <el-col :span="4">
+                      <div class="grid-content bg-purple bkchange">
+                        <a target="_blank" href="https://www.zhihu.com/">
+                          <h3>知乎</h3>
+                          <span>知乎 - 有问题，就会有答案</span>
+                        </a>
+                      </div>
+                    </el-col>
+                  </el-row>
+                  <el-row :gutter="20">
+                    <el-col :span="4">
+                      <div class="grid-content bg-purple bkchange">
+                        <a target="_blank" href="https://www.shejidaren.com/examples/tools/color-scheme/">
+                          <h3>Color Scheme</h3>
+                          <span>Color Scheme 在线配色网站</span>
+                        </a>
+                      </div>
+                    </el-col>
+                    <el-col :span="4">
+                      <div class="grid-content bg-purple bkchange">
+                        <a target="_blank"
+                          href="https://818ps.com/?user_source=r511669&sdclkid=ALfi15A615qi15oz&bd_vid=8593788968939265572">
+                          <h3>图怪兽</h3>
+                          <span>图怪兽作图神器-在线图片编辑器-PS图片制作-搞定平面设计不求人</span>
+                        </a>
+                      </div>
+                    </el-col>
+                    <el-col :span="4">
+                      <div class="grid-content bg-purple bkchange">
+                        <a target="_blank" href="https://www.om.cn/">
+                          <h3>欧模网</h3>
+                          <span>【欧模网】3d模型下载,原创3d模型下载-室内设计3d模型免费下载网站</span>
+                        </a>
+                      </div>
+                    </el-col>
+                    <el-col :span="4">
+                      <div class="grid-content bg-purple bkchange">
+                        <a target="_blank" target="_blank" href="http://3d.jzsc.net/?r=36">
+                          <h3>典尚网</h3>
+                          <span>典尚三维模型网 三维模型下载</span>
+                        </a>
+                      </div>
+                    </el-col>
+                    <el-col :span="4">
+                      <div class="grid-content bg-purple bkchange">
+                        <a target="_blank" target="_blank" href="https://www.gooood.cn/">
+                          <h3>谷德网</h3>
+                          <span>优质的案例展示与意向图搜寻</span>
+                        </a>
+                      </div>
+                    </el-col>
+                    <el-col :span="4">
+                      <div class="grid-content bg-purple bkchange">
+                        <a target="_blank" target="_blank" href="https://www.bilibili.com/">
+                          <h3>bilibili</h3>
+                          <span>国内知名的视频弹幕网站,这里有及时的动漫新番,活跃的ACG氛围,有创意的Up主。大家可以在这里找到许多欢乐。</span>
+                        </a>
+                      </div>
+                    </el-col>
+                  </el-row>
+
+                </div>
+
+                <p class="line"></p>
+
+
+
+
+
+
+                <!-- 第二导航栏 -->
+                <div class="cbox">
+
+                  <div class="naver">
+
+                    <div class="naverLine">
+                      <i class="el-icon-menu"></i>
+                      <span>设计导航栏</span>
+                    </div>
+
+                  </div>
+                  <el-row :gutter="20">
+                    <el-col :span="4">
+                      <div class="grid-content bg-purple ">
+                        <p style="color: #666;font-size: 18px;font-weight: 500;">UI干货
+                        <p>
+                      </div>
+                    </el-col>
+                    <el-col :span="4">
+                      <div class="grid-content bg-purple bkchange">
+                        <a target="_blank" href="http://zhongguose.com/">
+                          <h3>传统颜色</h3>
+                          <span>参看: 色谱 中科院科技情报编委会名词室.科学出版社!</span>
+                        </a>
+                      </div>
+                    </el-col>
+                    <el-col :span="4">
+                      <div class="grid-content bg-purple bkchange">
+                        <a target="_blank" href="https://www.kujiale.com/">
+                          <h3>酷家乐</h3>
+                          <span>新一代 | 全空间 3D设计平台</span>
+                        </a>
+                      </div>
+                    </el-col>
+                    <el-col :span="4">
+                      <div class="grid-content bg-purple bkchange">
+                        <a target="_blank" href="https://ibaotu.com/">
+                          <h3>包图网</h3>
+                          <span>包图网_专注原创商用设计图片下载,会员免费设计素材模板独家图库</span>
+                        </a>
+                      </div>
+                    </el-col>
+                    <el-col :span="4">
+                      <div class="grid-content bg-purple bkchange">
+                        <a target="_blank" href="https://www.znzmo.com/">
+                          <h3>知末</h3>
+                          <span>知末网 - 下素材找灵感看案例 - 发现更好的设计 </span>
+                        </a>
+                      </div>
+                    </el-col>
+                    <el-col :span="4">
+                      <div class="grid-content bg-purple bkchange">
+                        <a target="_blank" href="https://www.ypppt.com/">
+                          <h3>优品PPT</h3>
+                          <span>PPT模板免费下载_精美免费PPT模板下载 -【优品PPT】</span>
+                        </a>
+                      </div>
+                    </el-col>
+                  </el-row>
+
+                  <el-row :gutter="20">
+                    <el-col :span="4">
+                      <div class="grid-content bg-purple ">
+                        <p style="color: #666;font-size: 18px;font-weight: 500;">
+                        <p>
+                      </div>
+                    </el-col>
+                    <el-col :span="4">
+                      <div class="grid-content bg-purple bkchange">
+                        <a target="_blank" href="https://pngimg.com/">
+                          <h3>PNGIMG</h3>
+                          <span>透明PNG素材--人物--汽车--树,各种png素材</span>
+                        </a>
+                      </div>
+                    </el-col>
+                    <el-col :span="4">
+                      <div class="grid-content bg-purple bkchange">
+                        <a target="_blank" href="https://brushes8.com/">
+                          <h3>笔刷吧</h3>
+                          <span>海量PhotoShop笔刷素材免费下载!PS笔刷吧</span>
+                        </a>
+                      </div>
+                    </el-col>
+                    <el-col :span="4">
+                      <div class="grid-content bg-purple bkchange">
+                        <a target="_blank" href="https://www.sucai999.com/">
+                          <h3>菜鸟图库</h3>
+                          <span>视频素材、图片素材、png素材 免费下载图库 --菜鸟图库</span>
+                        </a>
+                      </div>
+                    </el-col>
+                    <el-col :span="4">
+                      <div class="grid-content bg-purple bkchange">
+                        <a target="_blank" href="https://www.zcool.com.cn/">
+                          <h3>站酷</h3>
+                          <span>站酷ZCOOL-设计师互动平台-打开站酷，发现更好的设计！</span>
+                        </a>
+                      </div>
+                    </el-col>
+                    <el-col :span="4">
+                      <div class="grid-content bg-purple bkchange">
+                        <a target="_blank" href="https://www.iconfont.cn/">
+                          <h3>ICONFONT</h3>
+                          <span>iconfont-国内功能很强大且图标内容很丰富的矢量图标库，提供矢量图标下载、在线存储、格式转换等功能。阿里巴巴体验团队倾力打造，设计和前端开发的便捷工具</span>
+                        </a>
+                      </div>
+                    </el-col>
+                  </el-row>
+
+
+                  <el-row :gutter="20">
+                    <el-col :span="4">
+                      <div class="grid-content bg-purple">
+
+                        <p style="color: #666;font-size: 18px;font-weight: 500;">意向图图库
+                        <p>
+
+
+                      </div>
+                    </el-col>
+                    <el-col :span="4">
+                      <div class="grid-content bg-purple bkchange">
+                        <a target="_blank" href="https://huaban.com/">
+                          <h3>花瓣网</h3>
+                          <span>花瓣网__陪你做生活的设计师!</span>
+                        </a>
+                      </div>
+                    </el-col>
+                    <el-col :span="4">
+                      <div class="grid-content bg-purple bkchange">
+                        <a target="_blank" href="https://www.aigei.com/3d/map/">
+                          <h3>爱给网</h3>
+                          <span>材质贴图 - 3d素材|3dmax|3d模型 - 免费下载 - 爱给网</span>
+                        </a>
+                      </div>
+                    </el-col>
+                    <el-col :span="4">
+                      <div class="grid-content bg-purple bkchange">
+                        <a target="_blank" href="https://www.vcg.com/">
+                          <h3>视觉中国网</h3>
+                          <span>视觉中国—正版高清图片、视频、音乐、字体下载—商业图片下载网站</span>
+                        </a>
+                      </div>
+                    </el-col>
+                    <el-col :span="4">
+                      <div class="grid-content bg-purple bkchange">
+                        <a target="_blank" href="https://www.pexels.com/zh-cn/">
+                          <h3>Pexels</h3>
+                          <span>才华横溢的摄影作者在这里免费分享最精彩的素材图片和视频。</span>
+                        </a>
+                      </div>
+                    </el-col>
+                    <el-col :span="4">
+                      <div class="grid-content bg-purple bkchange">
+                        <a target="_blank" href="http://www.landscape.cn/">
+                          <h3>景观中国</h3>
+                          <span>此网站不仅含有最新的国内外项目案例信息，还有各类竞赛咨询，前沿观点文章，强烈推荐。</span>
+                        </a>
+                      </div>
+                    </el-col>
+                  </el-row>
+
+
+                  <!-- 第五行 -->
+
+                  <el-row :gutter="20">
+                    <el-col :span="4">
+                      <div class="grid-content bg-purple">
+
+                        <p style="color: #666;font-size: 18px;font-weight: 500;">
+                        <p>
+
+
+                      </div>
+                    </el-col>
+                    <el-col :span="4">
+                      <div class="grid-content bg-purple bkchange">
+                        <a target="_blank" href="https://www.archdaily.cn/">
+                          <h3>Archdaily</h3>
+                          <span>ArchDaily | 传播世界建筑</span>
+                        </a>
+                      </div>
+                    </el-col>
+                    <el-col :span="4">
+                      <div class="grid-content bg-purple bkchange">
+                        <a target="_blank" href="https://www.cgarchitect.com/">
+                          <h3>Cgarchitect</h3>
+                          <span>建筑意向图搜寻网</span>
+                        </a>
+                      </div>
+                    </el-col>
+                    <el-col :span="4">
+                      <div class="grid-content bg-purple bkchange">
+                        <a target="_blank" href="http://chla.com.cn/">
+                          <h3>风景园林网</h3>
+                          <span>风景园林网-风景园林网|风景园林网</span>
+                        </a>
+                      </div>
+                    </el-col>
+                    <el-col :span="4">
+                      <div class="grid-content bg-purple bkchange">
+                        <a target="_blank" href="http://plant.archina.com/">
+                          <h3>景观植物网</h3>
+                          <span>这里可以查到所有景观植物信息，可以按地区属性查询，非常好</span>
+                        </a>
+                      </div>
+                    </el-col>
+                    <el-col :span="4">
+                      <div class="grid-content bg-purple bkchange">
+                        <a target="_blank" href="https://www.swagroup.cn/">
+                          <h3>SWA官网</h3>
+                          <span>其公司所著作品、案例、效果图</span>
+                        </a>
+                      </div>
+                    </el-col>
+                  </el-row>
+
+                </div>
+
+
+              </div>
+
+            </div>
+          </el-main>
+
+        </el-container>
+      </el-container>
+    </template>
+  </div>
+</body>
+<!-- import Vue before Element -->
+<script src="./vue2.2.js"></script>
+<!-- import JavaScript -->
+<script src="./element.js"></script>
+<script src="./index.js"></script>
+
+</html>
